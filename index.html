@@ -8,7 +8,7 @@
         /* --- Base & Reset --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background-color: #121212; /* 少しだけ深い黒へ変更し高級感を演出 */
+            background-color: #1a1a1a;
             color: #e0e0e0;
             font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
             height: 100vh;
@@ -20,138 +20,101 @@
         }
 
         /* --- Scaling Container --- */
+        /* 元の1280x720の「左半分(640x720)」を基準サイズとして定義 */
         #app-container {
-            width: 960px;
-            height: 1040px;
-            min-width: 960px;
-            min-height: 1040px;
+            width: 640px;
+            height: 720px;
+            min-width: 640px;
+            min-height: 720px;
             display: flex;
             flex-direction: column;
-            justify-content: center; 
+            justify-content: center;
             align-items: center;
-            gap: 5rem; /* 時計とカレンダーの間の贅沢な余白 */
-            padding: 3rem 4rem;
+            padding: 2rem;
             transform-origin: center center;
         }
 
-        /* --- 1. Premium Clock Area --- */
+        /* =========================================
+           以下、ご提供いただいたオリジナルのCSSを完全維持
+           ========================================= */
+
+        /* 1. Clock Area */
         .clock-area {
+            margin-bottom: 3rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             color: #ffffff;
-            width: 100%;
         }
         .clock-date {
-            font-size: 3.5rem; /* 大幅にサイズアップ */
+            font-size: 1.8rem;
             margin-bottom: 0.5rem;
-            letter-spacing: 0.08em;
-            font-weight: 500;
-            color: #cccccc;
+            letter-spacing: 0.05em;
+            font-weight: bold;
         }
         .clock-time {
             font-family: 'Courier New', Courier, monospace;
-            font-size: 11rem; /* 極限までサイズアップ */
+            font-size: 5rem;
             font-weight: bold;
             letter-spacing: 0.05em;
             line-height: 1;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* わずかなドロップシャドウで立体感を */
         }
 
-        /* --- 2. Premium Calendar Area --- */
+        /* 2. Calendar Area */
         .calendar-wrapper {
             width: 100%;
-            max-width: 880px;
-            background-color: #1a1a1a;
-            padding: 3rem 4rem; /* パディングを拡大 */
-            border-radius: 20px; /* 丸みを強くしてモダンに */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* 浮き出し効果 */
-            border: 1px solid #2a2a2a;
+            max-width: 550px;
         }
         .cal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             width: 100%;
-            padding: 0 1rem;
+            padding: 0 0.5rem;
         }
         .cal-title {
-            font-size: 2.8rem;
+            font-size: 1.8rem;
             font-weight: normal;
             letter-spacing: 0.1em;
-            color: #ffffff;
+            white-space: nowrap;
         }
         .cal-controls button {
-            background: #252525;
-            border: 1px solid #333;
-            color: #ccc;
-            padding: 0.8rem 1.5rem;
+            background: none;
+            border: 1px solid #444;
+            color: #aaa;
+            padding: 0.4rem 0.8rem;
             cursor: pointer;
-            font-size: 1.3rem;
-            border-radius: 8px;
-            margin-left: 0.8rem;
-            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+            transition: all 0.2s;
         }
-        .cal-controls button:hover { 
-            background: #3a3a3a; 
-            color: #fff; 
-            border-color: #555;
-        }
-        .cal-controls button#today-btn { 
-            background-color: #333; 
-            border-color: #555;
-            color: #fff;
-            font-weight: bold;
-        }
+        .cal-controls button:hover { border-color: #888; color: #fff; }
+        .cal-controls button#today-btn { border-color: #555; background-color: #252525; }
 
-        /* 常に6行7列 (42マス) を維持するグリッド */
         .cal-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            grid-template-rows: auto repeat(6, 1fr); /* 曜日1行 + 日付6行 */
-            gap: 8px; 
+            gap: 6px;
             text-align: center;
             width: 100%;
         }
-        
-        .day-name { 
-            font-size: 1.4rem; 
-            color: #888; 
-            padding-bottom: 1rem; 
-            font-weight: bold;
-            border-bottom: 1px solid #333;
-            margin-bottom: 0.5rem;
-        }
-        
         .cal-cell {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 70px; /* マスの高さを固定してリッチに */
-            font-size: 2.2rem; /* 日付を大きく */
-            color: #e0e0e0;
-            border-radius: 12px;
-            transition: background-color 0.2s;
+            padding: 0.8rem 0;
+            font-size: 1.2rem;
+            color: #bbb;
+            border-radius: 6px;
         }
-        
-        /* 今日の日付の特別ハイライト */
-        .is-today { 
-            background-color: #ffffff; 
-            color: #121212 !important; 
-            font-weight: bold; 
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-        }
-
-        /* 前月・翌月の日付（ミュート） */
-        .muted {
-            color: #444444 !important;
-            font-weight: normal !important;
-        }
+        .day-name { font-size: 0.9rem; color: #666; padding-bottom: 0.4rem; }
+        .is-today { background-color: #e0e0e0; color: #1a1a1a !important; font-weight: bold; }
 
         /* Color Utilities */
-        .sunday, .holiday { color: #ff5252; }
-        .saturday { color: #448aff; }
+        .sunday, .holiday { color: #cf6679; }
+        .saturday { color: #64b5f6; }
+        .text-high { color: #e0e0e0; }
+        .text-low { color: #888888; }
+        .text-rain { color: #64b5f6; }
 
     </style>
 </head>
@@ -179,17 +142,18 @@
     </div>
 
     <script>
-        // --- 0. オートスケーリング ---
+        // --- 0. オートスケーリング (オリジナル左パネル比率基準) ---
         function fitToScreen() {
-            const baseWidth = 960;
-            const baseHeight = 1040;
+            // 元の1280x720の左半分(640x720)を基準サイズに設定
+            const baseWidth = 640;
+            const baseHeight = 720;
             const scale = Math.min(window.innerWidth / baseWidth, window.innerHeight / baseHeight);
             document.getElementById('app-container').style.transform = `scale(${scale})`;
         }
         window.addEventListener('resize', fitToScreen);
         window.addEventListener('load', fitToScreen);
 
-        // --- 共通: 祝日判定ロジック ---
+        // --- 共通: 祝日判定ロジック (オリジナル維持) ---
         function getJapaneseHolidays(year, month) {
             const holidays = {}; 
             const fixed = [{m:0,d:1,n:"元日"},{m:1,d:11,n:"建国記念の日"},{m:1,d:23,n:"天皇誕生日"},{m:3,d:29,n:"昭和の日"},{m:4,d:3,n:"憲法記念日"},{m:4,d:4,n:"みどりの日"},{m:4,d:5,n:"こどもの日"},{m:7,d:11,n:"山の日"},{m:10,d:3,n:"文化の日"},{m:10,d:23,n:"勤労感謝の日"}];
@@ -220,7 +184,7 @@
             return holidays;
         }
 
-        // --- 1. 時計機能 ---
+        // --- 1. 時計機能 (オリジナル維持) ---
         function updateClock() {
             const now = new Date();
             const days = ['日', '月', '火', '水', '木', '金', '土'];
@@ -236,7 +200,7 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // --- 2. カレンダー機能 (42マス完全固定ロジック) ---
+        // --- 2. カレンダー機能 (オリジナル維持) ---
         const today = new Date();
         let currentYear = today.getFullYear();
         let currentMonth = today.getMonth();
@@ -246,80 +210,30 @@
         function renderCalendar(year, month) {
             calGrid.innerHTML = '';
             calTitle.textContent = `${year}年 ${month + 1}月`;
-            
-            const firstDayIndex = new Date(year, month, 1).getDay(); // 当月1日の曜日(0-6)
-            const lastDate = new Date(year, month + 1, 0).getDate(); // 当月の最終日(28-31)
-            const prevLastDate = new Date(year, month, 0).getDate(); // 前月の最終日
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
             const holidays = getJapaneseHolidays(year, month);
             
-            // 曜日ヘッダーの描画
             ['日','月','火','水','木','金','土'].forEach((d,i)=>{
-                const div = document.createElement('div'); 
-                div.className = 'day-name';
-                if(i===0) div.classList.add('sunday'); 
-                if(i===6) div.classList.add('saturday');
-                div.textContent = d; 
-                calGrid.appendChild(div);
+                const div=document.createElement('div'); div.className='day-name';
+                if(i===0)div.classList.add('sunday'); if(i===6)div.classList.add('saturday');
+                div.textContent=d; calGrid.appendChild(div);
             });
-
-            const totalCells = 42; // 常時6週(7x6)固定
-
-            // 日付セルの描画ループ
-            for(let i = 0; i < totalCells; i++) {
-                const div = document.createElement('div');
-                div.className = 'cal-cell';
-
-                if(i < firstDayIndex) {
-                    // --- 前月の日付 ---
-                    const prevDate = prevLastDate - firstDayIndex + i + 1;
-                    div.textContent = prevDate;
-                    div.classList.add('muted');
-                    
-                } else if(i >= firstDayIndex && i < firstDayIndex + lastDate) {
-                    // --- 当月の日付 ---
-                    const currentDate = i - firstDayIndex + 1;
-                    div.textContent = currentDate;
-                    
-                    const dt = new Date(year, month, currentDate);
-                    if(dt.getDay() === 0) div.classList.add('sunday');
-                    if(dt.getDay() === 6) div.classList.add('saturday');
-                    if(holidays[currentDate]) div.classList.add('holiday');
-                    
-                    if(year === today.getFullYear() && month === today.getMonth() && currentDate === today.getDate()) {
-                        div.classList.add('is-today');
-                    }
-                    
-                } else {
-                    // --- 翌月の日付 ---
-                    const nextDate = i - (firstDayIndex + lastDate) + 1;
-                    div.textContent = nextDate;
-                    div.classList.add('muted');
-                }
-
+            for(let i=0;i<firstDay.getDay();i++) calGrid.appendChild(document.createElement('div'));
+            for(let d=1;d<=lastDay.getDate();d++){
+                const div=document.createElement('div'); div.className='cal-cell'; div.textContent=d;
+                const dt=new Date(year,month,d);
+                if(dt.getDay()===0)div.classList.add('sunday');
+                if(dt.getDay()===6)div.classList.add('saturday');
+                if(holidays[d])div.classList.add('holiday');
+                if(year===today.getFullYear()&&month===today.getMonth()&&d===today.getDate())div.classList.add('is-today');
                 calGrid.appendChild(div);
             }
         }
-
-        document.getElementById('prev-btn').addEventListener('click', () => {
-            currentMonth--;
-            if(currentMonth < 0) { currentMonth = 11; currentYear--; }
-            renderCalendar(currentYear, currentMonth);
-        });
-        
-        document.getElementById('next-btn').addEventListener('click', () => {
-            currentMonth++;
-            if(currentMonth > 11) { currentMonth = 0; currentYear++; }
-            renderCalendar(currentYear, currentMonth);
-        });
-        
-        document.getElementById('today-btn').addEventListener('click', () => {
-            currentYear = today.getFullYear();
-            currentMonth = today.getMonth();
-            renderCalendar(currentYear, currentMonth);
-        });
-
-        // 初回描画
-        renderCalendar(currentYear, currentMonth);
+        document.getElementById('prev-btn').addEventListener('click', ()=>{currentMonth--;if(currentMonth<0){currentMonth=11;currentYear--;}renderCalendar(currentYear,currentMonth);});
+        document.getElementById('next-btn').addEventListener('click', ()=>{currentMonth++;if(currentMonth>11){currentMonth=0;currentYear++;}renderCalendar(currentYear,currentMonth);});
+        document.getElementById('today-btn').addEventListener('click', ()=>{currentYear=today.getFullYear();currentMonth=today.getMonth();renderCalendar(currentYear,currentMonth);});
+        renderCalendar(currentYear,currentMonth);
 
     </script>
 </body>
